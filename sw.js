@@ -3,7 +3,7 @@ const ASSETS = [
   './index.html',
   './audio_assets.js',
   './manifest.json',
-  './ritmosbr_app_icon_1776021093801.png'
+  './logotipo_ritmosbr.png'
 ];
 
 self.addEventListener('install', (event) => {

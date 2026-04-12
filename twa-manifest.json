@@ -1,0 +1,53 @@
+{
+  "packageId": "io.github.isaelmartins.twa",
+  "host": "isaelmartins.github.io",
+  "name": "RitmosBR - Ritmos Brasileiros no Violão",
+  "launcherName": "RitmosBR",
+  "display": "standalone",
+  "themeColor": "#3A86FF",
+  "themeColorDark": "#000000",
+  "navigationColor": "#000000",
+  "navigationColorDark": "#000000",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#050505",
+  "enableNotifications": true,
+  "startUrl": "/ritmosbr/index.html",
+  "iconUrl": "https://isaelmartins.github.io/ritmosbr/ritmosbr_app_icon_1776021093801.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "C:\\RitmosBR\\RitmosBR\\android.keystore",
+    "alias": "android"
+  },
+  "appVersionName": "1",
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://isaelmartins.github.io/ritmosbr/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {
+    "playBilling": {
+      "enabled": true
+    },
+    "locationDelegation": {
+      "enabled": true
+    }
+  },
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://isaelmartins.github.io/ritmosbr/",
+  "minSdkVersion": 21,
+  "orientation": "default",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "protocolHandlers": [],
+  "fileHandlers": [],
+  "launchHandlerClientMode": "",
+  "displayOverride": [],
+  "appVersion": "1"
+}
