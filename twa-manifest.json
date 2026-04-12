@@ -13,7 +13,7 @@
   "backgroundColor": "#050505",
   "enableNotifications": true,
   "startUrl": "/ritmosbr/index.html",
-  "iconUrl": "https://isaelmartins.github.io/ritmosbr/ritmosbr_app_icon_1776021093801.png",
+  "iconUrl": "https://isaelmartins.github.io/ritmosbr/logotipo_ritmosbr.png",
   "splashScreenFadeOutDuration": 300,
   "signingKey": {
     "path": "C:\\RitmosBR\\RitmosBR\\android.keystore",
