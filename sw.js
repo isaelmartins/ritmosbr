@@ -1,14 +1,25 @@
-const CACHE_NAME = 'ritmosbr-v1';
-const ASSETS = [
-  './index.html',
-  './audio_assets.js',
-  './manifest.json',
-  './logotipo_ritmosbr.png'
+const CACHE_NAME = 'ritmosbr-v1.0.2'; // Mudei a versão para forçar atualização
+const assets = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/sw.js',
+  '/audio_assets.js',
+  '/logotipo_ritmosbr.png'
 ];
 
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
+  self.skipWaiting(); // Força a nova versão a assumir o controle na hora
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
+    caches.open(CACHE_NAME).then(cache => cache.addAll(assets))
+  );
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys => Promise.all(
+      keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+    ))
   );
 });
 
