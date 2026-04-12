@@ -2,7 +2,7 @@
   "name": "RitmosBR - Ritmos Brasileiros no Violão",
   "short_name": "RitmosBR",
   "description": "Aprenda ritmos brasileiros no violão com sincronia perfeita.",
-  "start_url": "./indexmestre.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#050505",
   "theme_color": "#3a86ff",

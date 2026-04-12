@@ -1,6 +1,6 @@
 const CACHE_NAME = 'ritmosbr-v1';
 const ASSETS = [
-  './indexmestre.html',
+  './index.html',
   './audio_assets.js',
   './manifest.json',
   './ritmosbr_app_icon_1776021093801.png'
