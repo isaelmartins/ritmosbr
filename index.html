@@ -15,8 +15,8 @@
             --green: #00ff88; 
             --bg: #050505; 
             --gold: #ffd700; 
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass: rgba(255, 255, 255, 0.07);
+            --glass-border: rgba(255, 255, 255, 0.15);
         }
         
         body { 
@@ -31,91 +31,100 @@
             user-select: none;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
+            font-size: 18px; /* Fonte base aumentada */
         }
 
-        /* Premium Brand Header */
+        /* Header mais robusto e NOME MAIOR */
         .brand-container { 
             background: linear-gradient(to bottom, #111, #050505);
-            padding: 12px 20px; 
-            border-bottom: 1px solid var(--glass-border);
+            padding: 25px 20px; /* Aumentei o respiro */
+            border-bottom: 2px solid var(--glass-border);
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            gap: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            gap: 20px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.8);
+            z-index: 100;
         }
         
         .logo-icon { 
-            width: 32px; height: 32px; 
-            border: 2px solid var(--blue); 
+            width: 60px; height: 60px; /* Bem maior */
+            border: 4px solid var(--blue); 
             border-radius: 50%; 
             position: relative; 
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 10px var(--blue);
+            box-shadow: 0 0 20px rgba(58, 134, 255, 0.6);
         }
         
         .logo-icon::after { 
-            content: ''; width: 3px; height: 16px; background: var(--green); 
+            content: ''; width: 6px; height: 30px; background: var(--green); 
             position: absolute; bottom: 50%; transform-origin: bottom; 
             animation: swing 1s infinite ease-in-out; 
-            box-shadow: 0 0 8px var(--green);
+            box-shadow: 0 0 12px var(--green);
         }
 
         .brand-text { text-align: left; }
-        .app-name { font-size: 20px; font-weight: 900; color: white; margin: 0; line-height: 1; letter-spacing: 1px; }
-        .app-name span { color: var(--blue); text-shadow: 0 0 10px rgba(58, 134, 255, 0.5); }
-        .prof-name { font-size: 9px; color: var(--gold); text-transform: uppercase; font-weight: 700; margin-top: 4px; letter-spacing: 2px; }
+        .app-name { font-size: 36px; font-weight: 900; color: white; margin: 0; line-height: 0.9; letter-spacing: 1px; }
+        .app-name span { color: var(--blue); text-shadow: 0 0 20px rgba(58, 134, 255, 0.8); }
+        .prof-name { font-size: 14px; color: var(--gold); text-transform: uppercase; font-weight: 700; margin-top: 8px; letter-spacing: 4px; }
 
-        /* Glassmorphism Controls */
+        /* Controles - Ajuste de espaçamento */
         .header { 
-            padding: 15px; 
+            padding: 15px 20px; 
             display: flex; 
             flex-direction: column; 
             gap: 12px;
             background: var(--glass);
-            backdrop-filter: blur(10px);
-            margin: 10px;
-            border-radius: 12px;
+            backdrop-filter: blur(15px);
+            margin: 10px 15px;
+            border-radius: 16px;
             border: 1px solid var(--glass-border);
         }
 
-        .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+        .row { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
         
         select { 
             flex: 1; 
-            background: rgba(0,0,0,0.3); 
-            color: white; 
-            border: 1px solid var(--glass-border); 
-            padding: 10px; 
-            border-radius: 8px; 
-            font-weight: 600; 
-            font-size: 14px; 
+            background: #111; 
+            color: #fff; 
+            border: 2px solid var(--glass-border); 
+            padding: 12px; 
+            border-radius: 12px; 
+            font-weight: 700; 
+            font-size: 18px; 
             outline: none; 
             font-family: 'Outfit';
+            appearance: none;
+            text-align: center;
         }
         
         .bpm-display { 
             font-family: 'Outfit'; 
-            font-size: 16px; 
-            font-weight: 700;
+            font-size: 20px; 
+            font-weight: 900;
             color: var(--blue); 
-            min-width: 70px; 
+            min-width: 85px; 
             text-align: right;
         }
 
         input[type=range] { 
             flex: 1; 
             accent-color: var(--blue); 
-            height: 6px;
-            border-radius: 3px;
+            height: 10px;
+            border-radius: 5px;
+            cursor: pointer;
         }
         
-        /* Track & Lanes */
+        /* Trilha - Visual mais limpo e imersivo */
         .track { 
             flex: 1; 
             position: relative; 
-            background: radial-gradient(circle at center, #151515 0%, #050505 100%); 
-            overflow: hidden; 
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); 
+            overflow: hidden;
+            margin: 0 15px;
+            border-radius: 20px 20px 0 0;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-bottom: none;
         }
         
         .lanes { 
@@ -124,65 +133,77 @@
         }
         
         .lane { 
-            width: 1px; 
-            background: linear-gradient(to bottom, transparent, rgba(58, 134, 255, 0.2), transparent);
+            width: 2px; 
+            background: linear-gradient(to bottom, transparent, rgba(58, 134, 255, 0.1), transparent);
             height: 100%; 
         }
 
         .hit-line { 
-            position: absolute; bottom: 8vh; left: 0; right: 0; height: 60px; 
-            border-top: 2px solid var(--blue); 
-            background: linear-gradient(to bottom, rgba(58, 134, 255, 0.15), transparent); 
+            position: absolute; bottom: 12vh; left: 0; right: 0; height: 80px; 
+            border-top: 3px solid var(--blue); 
+            background: linear-gradient(to bottom, rgba(58, 134, 255, 0.2), transparent); 
             z-index: 10;
-            box-shadow: 0 -10px 20px rgba(58, 134, 255, 0.1);
+            box-shadow: 0 -15px 30px rgba(58, 134, 255, 0.2);
         }
         
-        /* Premium Notes */
+        /* Notas maiores para facilitar visualização */
         .note { 
             position: absolute; 
-            width: 44px; height: 44px; 
-            background: linear-gradient(135deg, #fff 0%, #ddd 100%); 
+            width: 55px; height: 55px; /* Aumentado */
+            background: linear-gradient(135deg, #ffffff 0%, #bbbbbb 100%); 
             color: #000; 
             border-radius: 50%; 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
             transform: translateX(-50%); 
             z-index: 5;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-            transition: transform 0.1s;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.6);
+            border: 2px solid #666;
         }
 
         .note.hit { 
             background: var(--green); 
-            box-shadow: 0 0 30px var(--green); 
-            transform: translateX(-50%) scale(1.3); 
-            border: 2px solid white;
+            box-shadow: 0 0 40px var(--green); 
+            transform: translateX(-50%) scale(1.4); 
+            border: 3px solid white;
         }
 
-        .f { font-weight: 900; font-size: 18px; line-height: 1; }
-        .d { font-size: 9px; font-weight: 800; color: var(--blue); text-transform: uppercase; }
+        .f { font-weight: 900; font-size: 22px; line-height: 1; }
+        .d { font-size: 11px; font-weight: 800; color: #3a86ff; text-transform: uppercase; margin-top: -2px; }
 
-        /* Footer & Buttons */
-        .footer { padding: 20px; background: #000; }
+        /* Rodapé e Botão Principal Gigante - ELEVADO */
+        .footer { 
+            padding: 25px 25px 60px 25px; /* Subi o botão forçando 60px de espaço embaixo */
+            background: linear-gradient(to top, #000, #0a0a0a);
+            z-index: 100;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         
         .play-btn { 
             width: 100%; 
-            padding: 18px; 
-            background: linear-gradient(135deg, var(--blue), #2a66ff); 
+            max-width: 400px; /* Evita que o botão fique largo demais em tablets */
+            padding: 22px; 
+            background: linear-gradient(135deg, var(--blue), #1e50ff); 
             border: none; 
-            border-radius: 14px; 
+            border-radius: 18px; 
             color: white; 
             font-family: 'Outfit';
-            font-size: 18px; 
-            font-weight: 800; 
+            font-size: 22px; 
+            font-weight: 900; 
             cursor: pointer; 
             text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 10px 20px rgba(58, 134, 255, 0.3);
-            transition: 0.3s;
+            letter-spacing: 3px;
+            box-shadow: 0 12px 30px rgba(58, 134, 255, 0.4);
+            transition: 0.2s;
         }
         
-        .play-btn:active { transform: scale(0.98); box-shadow: 0 5px 10px rgba(58, 134, 255, 0.2); }
-        .play-btn.active { background: linear-gradient(135deg, #ff4d4d, #ff0000); box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3); }
+        .play-btn:active { transform: scale(0.95); box-shadow: 0 5px 15px rgba(58, 134, 255, 0.2); }
+        .play-btn.active { 
+            background: linear-gradient(135deg, #ff4c4c, #cc0000); 
+            box-shadow: 0 15px 35px rgba(255, 0, 0, 0.4); 
+        }
 
         optgroup { background: #111; color: var(--gold); }
 
