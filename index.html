@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#3a86ff">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="ritmosbr_app_icon_1776021093801.png">
+    <title>RitmosBR - Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="audio_assets.js"></script>
+    <style>
+        :root { 
+            --blue: #3a86ff; 
+            --green: #00ff88; 
+            --bg: #050505; 
+            --gold: #ffd700; 
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+        
+        body { 
+            margin: 0; 
+            background: var(--bg); 
+            color: white; 
+            font-family: 'Outfit', sans-serif; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        /* Premium Brand Header */
+        .brand-container { 
+            background: linear-gradient(to bottom, #111, #050505);
+            padding: 12px 20px; 
+            border-bottom: 1px solid var(--glass-border);
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        
+        .logo-icon { 
+            width: 32px; height: 32px; 
+            border: 2px solid var(--blue); 
+            border-radius: 50%; 
+            position: relative; 
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 10px var(--blue);
+        }
+        
+        .logo-icon::after { 
+            content: ''; width: 3px; height: 16px; background: var(--green); 
+            position: absolute; bottom: 50%; transform-origin: bottom; 
+            animation: swing 1s infinite ease-in-out; 
+            box-shadow: 0 0 8px var(--green);
+        }
+
+        .brand-text { text-align: left; }
+        .app-name { font-size: 20px; font-weight: 900; color: white; margin: 0; line-height: 1; letter-spacing: 1px; }
+        .app-name span { color: var(--blue); text-shadow: 0 0 10px rgba(58, 134, 255, 0.5); }
+        .prof-name { font-size: 9px; color: var(--gold); text-transform: uppercase; font-weight: 700; margin-top: 4px; letter-spacing: 2px; }
+
+        /* Glassmorphism Controls */
+        .header { 
+            padding: 15px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            margin: 10px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+        
+        select { 
+            flex: 1; 
+            background: rgba(0,0,0,0.3); 
+            color: white; 
+            border: 1px solid var(--glass-border); 
+            padding: 10px; 
+            border-radius: 8px; 
+            font-weight: 600; 
+            font-size: 14px; 
+            outline: none; 
+            font-family: 'Outfit';
+        }
+        
+        .bpm-display { 
+            font-family: 'Outfit'; 
+            font-size: 16px; 
+            font-weight: 700;
+            color: var(--blue); 
+            min-width: 70px; 
+            text-align: right;
+        }
+
+        input[type=range] { 
+            flex: 1; 
+            accent-color: var(--blue); 
+            height: 6px;
+            border-radius: 3px;
+        }
+        
+        /* Track & Lanes */
+        .track { 
+            flex: 1; 
+            position: relative; 
+            background: radial-gradient(circle at center, #151515 0%, #050505 100%); 
+            overflow: hidden; 
+        }
+        
+        .lanes { 
+            position: absolute; top: 0; bottom: 0; left: 10%; right: 10%; 
+            display: flex; justify-content: space-between; 
+        }
+        
+        .lane { 
+            width: 1px; 
+            background: linear-gradient(to bottom, transparent, rgba(58, 134, 255, 0.2), transparent);
+            height: 100%; 
+        }
+
+        .hit-line { 
+            position: absolute; bottom: 8vh; left: 0; right: 0; height: 60px; 
+            border-top: 2px solid var(--blue); 
+            background: linear-gradient(to bottom, rgba(58, 134, 255, 0.15), transparent); 
+            z-index: 10;
+            box-shadow: 0 -10px 20px rgba(58, 134, 255, 0.1);
+        }
+        
+        /* Premium Notes */
+        .note { 
+            position: absolute; 
+            width: 44px; height: 44px; 
+            background: linear-gradient(135deg, #fff 0%, #ddd 100%); 
+            color: #000; 
+            border-radius: 50%; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            transform: translateX(-50%); 
+            z-index: 5;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            transition: transform 0.1s;
+        }
+
+        .note.hit { 
+            background: var(--green); 
+            box-shadow: 0 0 30px var(--green); 
+            transform: translateX(-50%) scale(1.3); 
+            border: 2px solid white;
+        }
+
+        .f { font-weight: 900; font-size: 18px; line-height: 1; }
+        .d { font-size: 9px; font-weight: 800; color: var(--blue); text-transform: uppercase; }
+
+        /* Footer & Buttons */
+        .footer { padding: 20px; background: #000; }
+        
+        .play-btn { 
+            width: 100%; 
+            padding: 18px; 
+            background: linear-gradient(135deg, var(--blue), #2a66ff); 
+            border: none; 
+            border-radius: 14px; 
+            color: white; 
+            font-family: 'Outfit';
+            font-size: 18px; 
+            font-weight: 800; 
+            cursor: pointer; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 20px rgba(58, 134, 255, 0.3);
+            transition: 0.3s;
+        }
+        
+        .play-btn:active { transform: scale(0.98); box-shadow: 0 5px 10px rgba(58, 134, 255, 0.2); }
+        .play-btn.active { background: linear-gradient(135deg, #ff4d4d, #ff0000); box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3); }
+
+        optgroup { background: #111; color: var(--gold); }
+
+        /* Tutorial Overlay & Diagrams */
+        .overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.92); backdrop-filter: blur(20px); 
+            z-index: 100; display: none; flex-direction: column; 
+            padding: 25px; box-sizing: border-box; overflow-y: auto;
+        }
+        .overlay.active { display: flex; }
+        
+        .tutorial-header { text-align: center; margin-bottom: 25px; }
+        .tutorial-title { font-size: 26px; font-weight: 900; color: var(--blue); margin: 0; letter-spacing: 1px; }
+        .tutorial-subtitle { font-size: 14px; opacity: 0.7; margin-top: 5px; }
+
+        .tutorial-grid { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
+        .tutorial-item { 
+            background: var(--glass); border: 1px solid var(--glass-border); 
+            padding: 15px; border-radius: 12px; display: flex; align-items: flex-start; gap: 15px;
+        }
+        .step-num { 
+            background: var(--blue); width: 28px; height: 28px; border-radius:50%; 
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 14px; font-weight: 900; flex-shrink: 0; box-shadow: 0 0 10px var(--blue);
+        }
+        .step-text h3 { margin: 0; font-size: 17px; color: var(--green); }
+        .step-text p { margin: 5px 0 0; font-size: 13px; opacity: 0.8; line-height: 1.5; }
+
+        /* Chord Diagram in Tutorial */
+        .chord-diagram {
+            display: flex; gap: 10px; margin-top: 10px; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .fretboard-mini {
+            width: 80px; height: 100px; display: flex; justify-content: space-between; position: relative; border: 1px solid #444; border-top: 4px solid #888;
+        }
+        .string-mini { width: 1px; background: #666; height: 100%; position: relative; }
+        .fret-mini { position: absolute; left: 0; right: 0; height: 1px; background: #444; }
+        .dot-mini { 
+            position: absolute; width: 12px; height: 12px; background: var(--blue); border-radius: 50%;
+            left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center;
+            font-size: 7px; color: white; font-weight: 900;
+        }
+
+        .pro-tips {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), transparent);
+            border: 1px solid rgba(255, 215, 0, 0.2); padding: 15px; border-radius: 12px; margin-bottom: 20px;
+        }
+        .pro-tips h4 { color: var(--gold); margin: 0 0 8px 0; font-size: 14px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+        .pro-tips ul { margin: 0; padding-left: 18px; font-size: 12px; opacity: 0.8; }
+        .pro-tips li { margin-bottom: 5px; }
+
+        .btn-help {
+            position: fixed; top: 15px; right: 15px; width: 38px; height: 38px;
+            border-radius: 50%; background: var(--glass); border: 1px solid var(--glass-border);
+            color: var(--blue); font-weight: bold; cursor: pointer; z-index: 90;
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(8px); box-shadow: 0 0 15px rgba(0,0,0,0.5); font-size: 18px;
+        }
+
+        .close-tutorial {
+            background: linear-gradient(135deg, var(--green), #00cc6a); color: black; border: none; padding: 18px;
+            border-radius: 14px; font-weight: 900; font-family: 'Outfit'; cursor: pointer;
+            margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; width: 100%;
+        }
+
+        /* Paywall Modal */
+        .paywall-content {
+            background: linear-gradient(to bottom, #111, #1a1a1a);
+            padding: 30px; border-radius: 20px; border: 2px solid var(--gold);
+            text-align: center; max-width: 400px; margin: auto;
+            position: relative;
+        }
+        .paywall-badge { background: var(--gold); color: black; font-weight: 900; padding: 5px 15px; border-radius: 20px; font-size: 12px; display: inline-block; margin-bottom: 15px; }
+        .paywall-price { font-size: 32px; font-weight: 900; margin: 15px 0; color: white; }
+        .paywall-benefits { text-align: left; margin: 20px 0; font-size: 14px; }
+        .paywall-benefits li { list-index-type: none; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        
+        .buy-btn {
+            background: var(--gold); color: black; border: none; padding: 18px;
+            border-radius: 14px; font-weight: 900; font-family: 'Outfit'; cursor: pointer;
+            width: 100%; font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-help" onclick="toggleTutorial()">?</button>
+
+    <div id="tutorial" class="overlay">
+        <div class="tutorial-header">
+            <h2 class="tutorial-title">COMO USAR O RITMOSBR</h2>
+            <div class="tutorial-subtitle">Aprenda a tocar como um profissional</div>
+        </div>
+
+        <div class="tutorial-grid">
+            <div class="tutorial-item">
+                <div class="step-num">1</div>
+                <div class="step-text">
+                    <h3>Sincronia Visual</h3>
+                    <p>Toque no violão exatamente quando a linha azul cruzar o centro da bolinha. O brilho <b>Verde</b> confirma a precisão.</p>
+                </div>
+            </div>
+
+            <div class="tutorial-item">
+                <div class="step-num">2</div>
+                <div class="step-text">
+                    <h3>Diagrama das Notas (Exemplo)</h3>
+                    <p>Veja abaixo onde posicionar os dedos para os acordes base:</p>
+                    <div class="chord-diagram">
+                        <div class="fretboard-mini">
+                            <div class="fret-mini" style="top:25%"></div><div class="fret-mini" style="top:50%"></div><div class="fret-mini" style="top:75%"></div>
+                            <div class="string-mini"><div class="dot-mini" style="top:62.5%">P2</div></div>
+                            <div class="string-mini"><div class="dot-mini" style="top:62.5%">P1</div></div>
+                            <div class="string-mini"><div class="dot-mini" style="top:37.5%">I</div></div>
+                            <div class="string-mini"><div class="dot-mini" style="top:87.5%">M</div></div>
+                            <div class="string-mini"><div class="dot-mini" style="top:62.5%">A</div></div>
+                            <div class="string-mini"></div>
+                        </div>
+                        <div style="font-size: 11px; display: flex; flex-direction: column; justify-content: space-around;">
+                            <span><b>P1:</b> Polegar</span>
+                            <span><b>I:</b> Indicador</span>
+                            <span><b>M:</b> Médio</span>
+                            <span><b>A:</b> Anelar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-tips">
+                <h4>✨ Dicas de Mestre</h4>
+                <ul>
+                    <li>🎧 <b>Use fones de ouvido:</b> Para evitar latência e ouvir os detalhes dos samples reais.</li>
+                    <li>🐢 <b>Comece Devagar:</b> Ajuste o slider para 60 BPM até memorizar o padrão.</li>
+                    <li>📱 <b>Foco Total:</b> Este app foi calibrado para performance máxima, evite outros apps abertos.</li>
+                </ul>
+            </div>
+        </div>
+
+        <button class="close-tutorial" onclick="toggleTutorial()">ESTOU PRONTO!</button>
+    </div>
+
+    <!-- Paywall Overlay -->
+    <div id="paywall" class="overlay">
+        <div class="paywall-content">
+            <div class="paywall-badge">RITMOSBR PRO</div>
+            <h2 style="margin:0">Acesso Premium</h2>
+            <p style="opacity:0.7; font-size: 14px;">Masterize o violão brasileiro com todos os recursos liberados.</p>
+            
+            <div class="paywall-price">R$ 14,90<span style="font-size:12px; opacity:0.5">/mês</span></div>
+
+            <div class="paywall-benefits">
+                <li>✅ Acesso Total a +20 Ritmos Pro</li>
+                <li>✅ Novos ritmos adicionados mensalmente</li>
+                <li>✅ Suporte exclusivo do Prof. Isael</li>
+                <li>✅ Cancele sua assinatura quando quiser</li>
+            </div>
+
+            <button class="buy-btn" onclick="buyPremium()">ASSINAR AGORA</button>
+            <button onclick="togglePaywall()" style="background:none; border:none; color:white; opacity:0.5; margin-top:15px; cursor:pointer">Voltar</button>
+        </div>
+    </div>
+
+    <div class="brand-container">
+        <div class="logo-icon"></div>
+        <div class="brand-text">
+            <h1 class="app-name">RITMOS<span>BR</span></h1>
+            <div class="prof-name">Prof. Isael Martins</div>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="row">
+            <select id="ritmo-select" onchange="changeRitmo(this.value)"></select>
+        </div>
+        <div class="row">
+            <span id="bpm-label" class="bpm-display">80 BPM</span>
+            <input type="range" id="bpm-slider" min="40" max="150" value="80">
+        </div>
+    </div>
+
+    <div class="track" id="main-track">
+        <div class="lanes"><div class="lane"></div><div class="lane"></div><div class="lane"></div><div class="lane"></div><div class="lane"></div><div class="lane"></div></div>
+        <div class="hit-line" id="hit-marker"></div>
+    </div>
+
+    <div class="footer">
+        <button class="play-btn" id="btn-toggle" onclick="togglePlay()">INICIAR</button>
+    </div>
+
+    <script>
+        const N = {
+            G2: { s: 6, f: 3, hz: 98.00, d: "P2" },
+            C3: { s: 5, f: 3, hz: 130.81, d: "P1" },
+            E3: { s: 4, f: 2, hz: 164.81, d: "I" },
+            B3: { s: 3, f: 4, hz: 246.94, d: "M" },
+            D4: { s: 2, f: 3, hz: 293.66, d: "A" }
+        };
+        const ACORDE = [N.E3, N.B3, N.D4];
+        const MA = [N.B3, N.D4];
+        const P1MA = [N.C3, N.B3, N.D4];
+        const CHEIO_P1 = [N.C3, N.E3, N.B3, N.D4];
+        const CHEIO_P2 = [N.G2, N.E3, N.B3, N.D4];
+
+        const biblioteca = [
+            { nome: "Valsa", loop: 3.0, premium: false, map: [[0.0, [N.C3]], [1.0, ACORDE], [2.0, ACORDE]] },
+            { nome: "Xote", loop: 3.0, premium: false, map: [[0.0, [N.C3]], [0.5, [N.E3]], [0.75, MA], [1.25, [N.E3]], [1.5, [N.G2]], [2.0, [N.E3]], [2.25, MA], [2.75, [N.E3]]] },
+            { nome: "Baião 01", loop: 2.0, premium: false, map: [[0.0, CHEIO_P1], [0.75, CHEIO_P1]] },
+            { nome: "Samba Bossa", loop: 2.0, premium: false, map: [[0.0, CHEIO_P1], [0.5, ACORDE], [1.0, [N.G2]], [1.25, ACORDE]] },
+            
+            // --- PREMIUM ---
+            { nome: "Galope", loop: 2.0, premium: true, map: [[0.5, MA], [0.75, [N.E3]], [1.0, [N.C3]], [1.5, [N.C3]]] },
+            { nome: "Ijexá", loop: 2.0, premium: true, map: [[0.0, ACORDE], [0.75, [N.C3]], [1.0, ACORDE], [1.5, [N.C3]]] },
+            { nome: "Ijexá 02", loop: 4.0, premium: true, map: [[0.0, ACORDE], [0.25, ACORDE], [0.75, ACORDE], [1.25, ACORDE], [1.5, [N.C3]], [2.0, ACORDE], [2.5, [N.C3]], [3.0, ACORDE], [3.5, [N.C3]]] },
+            { nome: "Maxixe", loop: 2.0, premium: true, map: [[0.0, [N.C3]], [0.25, ACORDE], [0.75, ACORDE], [1.0, [N.C3]], [1.5, CHEIO_P1]] },
+            { nome: "Maxixe 02", loop: 2.0, premium: true, map: [[0.0, [N.C3]], [0.25, [N.E3]], [0.5, MA], [0.75, MA], [1.0, [N.C3]], [1.5, CHEIO_P1]] },
+            { nome: "Maxixe 03", loop: 2.0, premium: true, map: [[0.0, [N.C3]], [0.25, ACORDE], [0.75, ACORDE], [1.0, [N.C3]], [1.25, [N.E3]], [1.5, P1MA], [1.75, [N.E3]]] },
+            
+            // --- SAMBAS PREMIUM ---
+            { nome: "Samba Var. 07", loop: 4.0, premium: true, map: [[0.0, [N.C3]], [0.25, ACORDE], [0.75, ACORDE], [1.0, CHEIO_P2], [1.5, ACORDE], [2.0, CHEIO_P1], [2.5, ACORDE], [3.0, [N.G2]], [3.25, ACORDE], [3.75, ACORDE]] },
+            { nome: "Samba Var. 06", loop: 4.0, premium: true, map: [[0.0, [N.C3]], [0.25, ACORDE], [1.0, CHEIO_P2], [1.5, ACORDE], [2.0, CHEIO_P1], [2.5, ACORDE], [3.0, [N.G2]], [3.25, ACORDE], [3.75, ACORDE]] },
+            { nome: "Samba Var. 05", loop: 2.0, premium: true, map: [[0.0, [N.C3]], [0.25, ACORDE], [0.75, ACORDE], [1.0, [N.G2]], [1.25, ACORDE], [1.75, ACORDE]] },
+            { nome: "Samba Var. 04", loop: 2.0, premium: true, map: [[0.0, CHEIO_P1], [0.25, ACORDE], [0.75, ACORDE], [1.0, CHEIO_P2], [1.25, ACORDE], [1.75, ACORDE]] },
+            { nome: "Samba Var. 03", loop: 4.0, premium: true, map: [[0.0, CHEIO_P1], [0.5, ACORDE], [0.75, ACORDE], [1.0, [N.G2]], [1.25, ACORDE], [1.75, ACORDE], [2.0, [N.C3]], [2.25, ACORDE], [2.75, [N.G2]], [3.0, ACORDE], [3.5, ACORDE]] },
+            { nome: "Samba Var. 02", loop: 4.0, premium: true, map: [[0.0, CHEIO_P1], [0.5, ACORDE], [0.75, ACORDE], [1.0, [N.G2]], [1.25, ACORDE], [1.75, ACORDE], [2.0, [N.C3]], [2.25, ACORDE], [2.75, ACORDE], [3.0, [N.G2]], [3.5, ACORDE]] },
+            { nome: "Samba Var. 01", loop: 4.0, premium: true, map: [[0.0, CHEIO_P1], [0.5, ACORDE], [1.0, [N.G2]], [1.25, ACORDE], [1.75, ACORDE], [2.0, [N.G2]], [2.25, ACORDE], [2.75, ACORDE], [3.0, [N.G2]], [3.5, ACORDE]] },
+            { nome: "Samba Síncopado", loop: 2.0, premium: true, map: [[0.0, [N.C3]], [0.5, ACORDE], [1.0, [N.G2]], [1.25, ACORDE], [1.75, ACORDE]] },
+
+            // --- BAIÕES & OUTROS PREMIUM ---
+            { nome: "Baião 02", loop: 2.0, premium: true, map: [[0.0, CHEIO_P1], [0.75, CHEIO_P1], [1.5, [N.C3]]] },
+            { nome: "Baião 03", loop: 2.0, premium: true, map: [[0.0, CHEIO_P1], [0.75, [N.C3]], [1.0, ACORDE], [1.5, [N.C3]]] },
+            { nome: "Baião 04", loop: 2.0, premium: true, map: [[0.0, [N.C3]], [0.75, [N.C3]], [1.0, ACORDE], [1.5, [N.C3]]] },
+            { nome: "Baião 05", loop: 2.0, premium: true, map: [[0.0, [N.C3]], [0.25, ACORDE], [0.75, [N.C3]], [1.0, ACORDE], [1.5, ACORDE]] },
+            { nome: "Frevo 01", loop: 4.0, premium: true, map: [[0.0, CHEIO_P1], [0.75, ACORDE], [1.0, [N.G2]], [1.5, ACORDE], [2.0, [N.C3]], [2.5, ACORDE], [3.0, CHEIO_P2]] },
+            { nome: "Frevo 02", loop: 4.0, premium: true, map: [[0.0, CHEIO_P1], [0.75, ACORDE], [1.0, [N.G2]], [1.5, ACORDE], [2.0, [N.C3]], [2.25, ACORDE], [3.0, CHEIO_P2]] },
+            { nome: "Partido Alto 01", loop: 4.0, premium: true, map: [[0.0, [N.C3]], [0.25, ACORDE], [1.0, CHEIO_P2], [1.5, ACORDE], [2.0, CHEIO_P1], [2.5, ACORDE], [3.0, [N.G2]], [3.25, ACORDE], [3.75, ACORDE]] },
+            { nome: "Partido Alto 02", loop: 4.0, premium: true, map: [[0.0, [N.C3]], [0.25, ACORDE], [0.75, ACORDE], [1.0, CHEIO_P2], [1.5, ACORDE], [2.0, CHEIO_P1], [2.5, ACORDE], [3.0, [N.G2]], [3.25, ACORDE], [3.75, ACORDE]] }
+        ];
+
+        let isPremiumUser = false; // CONTROLE MASTER: Mude para 'true' para liberar tudo para você!
+
+        let aCtx, isRunning = false, currentBPM = 80, currentRitmoIdx = 0;
+        let nextNoteTime = 0, timerWorker = null;
+        let scheduleAheadTime = 2.0; 
+        let patternIdx = 0, beatZeroTime = 0;
+        const audioBuffers = {};
+
+        // Inicializar IDs
+        Object.keys(N).forEach(key => N[key].id = key);
+
+        // Processar padrões antecipadamente para performance
+        biblioteca.forEach(r => {
+            r.pattern = r.map.map(item => ({ t: item[0], notes: item[1] }));
+        });
+
+        async function loadAudioFiles() {
+            if (!aCtx) setupAudioContext();
+            const notes = Object.keys(N);
+            const statusLabel = document.getElementById('btn-toggle');
+            
+            statusLabel.disabled = true;
+
+            // Processar áudio embutido de alta fidelidade
+            for (const noteId of notes) {
+                if (audioBuffers[noteId]) continue;
+                if (typeof AUDIO_ASSETS !== 'undefined' && AUDIO_ASSETS[noteId]) {
+                    try {
+                        statusLabel.innerText = `SINCRO: ${noteId}...`;
+                        const arrayBuffer = base64ToArrayBuffer(AUDIO_ASSETS[noteId]);
+                        const decoded = await aCtx.decodeAudioData(arrayBuffer);
+                        
+                        let firstSample = decoded.length;
+                        for (let c = 0; c < decoded.numberOfChannels; c++) {
+                            const data = decoded.getChannelData(c);
+                            for (let i = 0; i < data.length; i++) {
+                                if (Math.abs(data[i]) > 0.005) { 
+                                    firstSample = Math.min(firstSample, i); 
+                                    break; 
+                                }
+                            }
+                        }
+                        if (firstSample >= decoded.length) firstSample = 0;
+                        decoded.startOffset = firstSample / decoded.sampleRate;
+                        audioBuffers[noteId] = decoded;
+                        console.log(`${noteId} calibrado: ${decoded.startOffset.toFixed(4)}s`);
+                    } catch (e) {
+                        console.error(`Erro em ${noteId}:`, e);
+                    }
+                }
+            }
+            statusLabel.innerText = isRunning ? "PARAR" : "REPRODUZIR RITMOS";
+            statusLabel.disabled = false;
+        }
+
+        function base64ToArrayBuffer(base64) {
+            const binaryString = window.atob(base64);
+            const bytes = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        function setupAudioContext() {
+            aCtx = new (window.AudioContext || window.webkitAudioContext)({
+                latencyHint: 'interactive' // Modo de ultra-baixa latência
+            });
+            // Conexão direta para latência mínima zero
+        }
+
+        function playSound(noteData, time) {
+            const buffer = audioBuffers[noteData.id];
+            if (buffer) {
+                const source = aCtx.createBufferSource();
+                source.buffer = buffer;
+                source.connect(aCtx.destination); // Saída direta
+                source.start(time, buffer.startOffset || 0);
+                return false;
+            } else {
+                const o = aCtx.createOscillator(), g = aCtx.createGain();
+                o.type = 'sine'; o.frequency.setValueAtTime(noteData.hz, time);
+                g.gain.setValueAtTime(0.1, time);
+                g.gain.exponentialRampToValueAtTime(0.0001, time + 0.1);
+                g.connect(aCtx.destination);
+                o.connect(g);
+                o.start(time); o.stop(time + 0.1);
+                return true;
+            }
+        }
+
+        function createNoteVisual(noteData, targetTime, isFallback) {
+            const el = document.createElement('div');
+            el.className = 'note';
+            if (isFallback) el.style.border = "2px solid red";
+            el.innerHTML = `<span class="f">${noteData.f}</span><span class="d">${noteData.d}</span>`;
+            el.style.left = (10 + (6 - noteData.s) * 16) + "%";
+            document.getElementById('main-track').appendChild(el);
+
+            const hitY = document.getElementById('hit-marker').offsetTop;
+            const speed = 450 * (currentBPM / 80); 
+
+            function update() {
+                if(!isRunning) { el.remove(); return; }
+                
+                const now = aCtx.currentTime;
+                // Posição baseada na diferença de tempo exata entre o áudio e o presente
+                const timeDiff = targetTime - now;
+                const y = hitY - (timeDiff * speed) - 20; 
+                
+                el.style.top = y + "px";
+
+                if (timeDiff <= 0 && !el.dataset.hit) {
+                    el.dataset.hit = "true";
+                    el.classList.add('hit');
+                    setTimeout(() => el.remove(), 100);
+                }
+
+                if (y < window.innerHeight + 100) {
+                    requestAnimationFrame(update);
+                } else {
+                    el.remove();
+                }
+            }
+            requestAnimationFrame(update);
+        }
+
+        function scheduler() {
+            while (nextNoteTime < aCtx.currentTime + scheduleAheadTime) {
+                const ritmo = biblioteca[currentRitmoIdx];
+                const pattern = ritmo.pattern;
+                const secondsPerBeat = 60.0 / currentBPM;
+                
+                // Agendar som e visual
+                pattern[patternIdx].notes.forEach(n => {
+                    const isFallback = playSound(n, nextNoteTime);
+                    createNoteVisual(n, nextNoteTime, isFallback);
+                });
+
+                // Avançar para a próxima nota baseada no tempo absoluto desde o início
+                patternIdx++;
+                if (patternIdx >= pattern.length) {
+                    patternIdx = 0;
+                    beatZeroTime += ritmo.loop * secondsPerBeat;
+                }
+                
+                nextNoteTime = beatZeroTime + (pattern[patternIdx].t * secondsPerBeat);
+            }
+        }
+
+        async function togglePlay() {
+            if (!aCtx) setupAudioContext();
+            if (aCtx.state === 'suspended') await aCtx.resume();
+            
+            if (Object.keys(audioBuffers).length === 0) {
+                await loadAudioFiles();
+            }
+
+            isRunning = !isRunning;
+            const btn = document.getElementById('btn-toggle');
+            btn.innerText = isRunning ? "PARAR RITMO" : "INICIAR REPRODUÇÃO";
+            btn.classList.toggle('active', isRunning);
+            
+            if(isRunning) {
+                patternIdx = 0;
+                beatZeroTime = aCtx.currentTime + 1.5;
+                const ritmo = biblioteca[currentRitmoIdx];
+                nextNoteTime = beatZeroTime + (ritmo.pattern[0].t * (60/currentBPM));
+                
+                if (!timerWorker) {
+                    const workerCode = `
+                        let timerID = null;
+                        self.onmessage = (e) => {
+                            if (e.data === "start") {
+                                if (!timerID) timerID = setInterval(() => self.postMessage("tick"), 25);
+                            } else if (e.data === "stop") {
+                                clearInterval(timerID);
+                                timerID = null;
+                            }
+                        };
+                    `;
+                    const blob = new Blob([workerCode], { type: 'application/javascript' });
+                    timerWorker = new Worker(URL.createObjectURL(blob));
+                    timerWorker.onmessage = (e) => { if(e.data == "tick") scheduler(); };
+                }
+                timerWorker.postMessage("start");
+            } else {
+                if(timerWorker) timerWorker.postMessage("stop");
+                document.querySelectorAll('.note').forEach(n => n.remove());
+            }
+        }
+
+        function changeRitmo(idx) {
+            const ritmo = biblioteca[parseInt(idx)];
+            
+            if (ritmo.premium && !isPremiumUser) {
+                togglePaywall();
+                // Reverter o select para o anterior
+                document.getElementById('ritmo-select').value = currentRitmoIdx;
+                return;
+            }
+
+            currentRitmoIdx = parseInt(idx);
+            if(isRunning) {
+                patternIdx = 0;
+                beatZeroTime = aCtx.currentTime + 1.5;
+                const ritmo = biblioteca[currentRitmoIdx];
+                nextNoteTime = beatZeroTime + (ritmo.pattern[0].t * (60/currentBPM));
+            }
+        }
+
+        function togglePaywall() {
+            document.getElementById('paywall').classList.toggle('active');
+        }
+
+        // --- GOOGLE PLAY BILLING REAL ---
+        async function buyPremium() {
+            if (!window.getDigitalGoodsService) {
+                alert("A compra está disponível apenas após instalar o app pela Google Play Store.");
+                return;
+            }
+
+            try {
+                const service = await window.getDigitalGoodsService('https://play.google.com/billing');
+                const pDetails = await service.getDetails(['ritmosbr_pro_sub']);
+                
+                // Chamar interface de pagamento do Google
+                const paymentMethods = [{
+                    supportedMethods: 'https://play.google.com/billing',
+                    data: { sku: 'ritmosbr_pro_sub' }
+                }];
+                const request = new PaymentRequest(paymentMethods);
+                const response = await request.show();
+                
+                // Validar sucesso
+                if (response) {
+                    await response.complete('success');
+                    unlockPremiumPermanently();
+                }
+            } catch (e) {
+                console.error("Erro na compra:", e);
+                alert("Não foi possível processar a compra agora. Tente novamente.");
+            }
+        }
+
+        function unlockPremiumPermanently() {
+            isPremiumUser = true;
+            localStorage.setItem('ritmosbr_pro_active', 'true');
+            togglePaywall();
+            init();
+            alert("Parabéns! Você agora é um usuário Premium do RitmosBR.");
+        }
+
+        async function checkLicense() {
+            // Verificar se já comprou via LocalStorage (mais rápido)
+            if (localStorage.getItem('ritmosbr_pro_active') === 'true') {
+                isPremiumUser = true;
+                return;
+            }
+
+            // Verificar direto com o Google Play se estiver no Android
+            if (window.getDigitalGoodsService) {
+                try {
+                    const service = await window.getDigitalGoodsService('https://play.google.com/billing');
+                    const purchases = await service.listPurchases();
+                    for (const p of purchases) {
+                        if (p.itemId === 'ritmosbr_pro_sub') {
+                            isPremiumUser = true;
+                            localStorage.setItem('ritmosbr_pro_active', 'true');
+                            break;
+                        }
+                    }
+                } catch (e) { console.log("Sem licença ativa"); }
+            }
+        }
+
+        async function init() {
+            await checkLicense();
+            const select = document.getElementById('ritmo-select');
+            const currentVal = select.value;
+            select.innerHTML = "";
+            
+            const categorias = {
+                "Essenciais (Grátis)": ["Valsa", "Xote", "Baião 01", "Samba Bossa"],
+                "Pro: Sambas": ["Samba Síncopado", "Samba Var. 01", "Samba Var. 02", "Samba Var. 03", "Samba Var. 04", "Samba Var. 05", "Samba Var. 06", "Samba Var. 07"],
+                "Pro: Nordeste & Outros": ["Galope", "Ijexá", "Ijexá 02", "Maxixe", "Maxixe 02", "Maxixe 03", "Frevo 01", "Frevo 02", "Partido Alto 01", "Partido Alto 02", "Baião 02", "Baião 03", "Baião 04", "Baião 05"]
+            };
+
+            for (const [cat, ritmos] of Object.entries(categorias)) {
+                const group = document.createElement('optgroup');
+                group.label = cat;
+                ritmos.forEach(nome => {
+                    const r = biblioteca.find(rit => rit.nome === nome);
+                    if (r) {
+                        const idx = biblioteca.indexOf(r);
+                        const opt = document.createElement('option');
+                        opt.value = idx;
+                        const suffix = (r.premium && !isPremiumUser) ? " 🔒" : "";
+                        opt.textContent = nome + suffix;
+                        group.appendChild(opt);
+                    }
+                });
+                select.appendChild(group);
+            }
+            if (currentVal) select.value = currentVal;
+
+            // Exibir tutorial na primeira vez
+            if (!localStorage.getItem('ritmosbr_visited')) {
+                toggleTutorial();
+                localStorage.setItem('ritmosbr_visited', 'true');
+            }
+        }
+
+        function toggleTutorial() {
+            document.getElementById('tutorial').classList.toggle('active');
+        }
+
+        document.getElementById('bpm-slider').oninput = (e) => {
+            currentBPM = e.target.value;
+            document.getElementById('bpm-label').innerText = currentBPM + " BPM";
+        };
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+              .then(() => console.log("PWA: Service Worker Ativo"))
+              .catch(e => console.error("PWA Erro:", e));
+        }
+
+        // Prevent Context Menu
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        init();
+    </script>
+</body>
+</html>
