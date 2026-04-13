@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ritmosbr-v1.0.2'; // Mudei a versão para forçar atualização
+const CACHE_NAME = 'ritmosbr-v1.0.3'; // FORCE UPDATE 1.0.3 // Mudei a versão para forçar atualização
 const assets = [
   '/',
   '/index.html',
