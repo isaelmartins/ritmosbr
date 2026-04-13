@@ -23,9 +23,13 @@
     },
     {
       "src": "logotipo_ritmosbr.png",
-      "sizes": "1024x1024",
+      "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "maskable"
     }
-  ]
+  ],
+  "display": "standalone",
+  "orientation": "portrait",
+  "dir": "ltr",
+  "lang": "pt-BR"
 }
