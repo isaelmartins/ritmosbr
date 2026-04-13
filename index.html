@@ -724,49 +724,47 @@
             };
 
             for (const [catName, ritmosNames] of Object.entries(categorias)) {
-                // Título da Categoria
                 const label = document.createElement('span');
                 label.className = 'group-label';
                 label.innerText = catName;
                 list.appendChild(label);
 
-                // Itens desta Categoria
                 ritmosNames.forEach(nome => {
-                    const ritmo = biblioteca.find(r => r.nome === nome);
-                    if (!ritmo) return;
-                    const idx = biblioteca.indexOf(ritmo);
+                    const idx = biblioteca.findIndex(r => r.nome === nome);
+                    if (idx === -1) return;
+                    const ritmo = biblioteca[idx];
 
                     const item = document.createElement('div');
                     const isLocked = ritmo.premium && !isPremiumUser;
                     item.className = `ritmo-item ${idx === currentRitmoIdx ? 'selected' : ''} ${isLocked ? 'locked' : ''}`;
                     
-                    let lockIcon = '';
-                    if (isLocked) lockIcon = '<span class="ritmo-lock">🔒</span>';
+                    let lockIcon = isLocked ? '<span class="ritmo-lock">🔒</span>' : '';
 
                     item.innerHTML = `
-                    <span class="ritmo-name">${ritmo.nome}</span>
-                    ${lockIcon}
-                `;
+                        <span class="ritmo-name">${ritmo.nome}</span>
+                        ${lockIcon}
+                    `;
 
-                item.onclick = () => {
-                    if (isLocked) {
-                        togglePaywall();
-                    } else {
-                        changeRitmo(idx);
-                        closePicker();
-                    }
-                };
-                list.appendChild(item);
-            });
+                    item.onclick = () => {
+                        if (isLocked) {
+                            togglePaywall();
+                        } else {
+                            changeRitmo(idx);
+                            closePicker();
+                        }
+                    };
+                    list.appendChild(item);
+                });
+            }
+            // Atualiza o botão principal com o nome correto
+            if (biblioteca[currentRitmoIdx]) {
+                document.getElementById('current-ritmo-name').innerText = biblioteca[currentRitmoIdx].nome;
+            }
         }
-
-        // Atualiza o botão principal na tela
-        document.getElementById('current-ritmo-name').innerText = biblioteca[currentRitmoIdx].nome;
-    }
 
         function openPicker() {
             document.getElementById('picker-modal').style.display = 'flex';
-            renderRitmoList(); // Garante atualização de cadeados e seleção
+            renderRitmoList();
         }
 
         function closePicker() {
@@ -775,7 +773,9 @@
 
         function changeRitmo(idx) {
             currentRitmoIdx = parseInt(idx);
-            document.getElementById('current-ritmo-name').innerText = biblioteca[currentRitmoIdx].nome;
+            if (biblioteca[currentRitmoIdx]) {
+                document.getElementById('current-ritmo-name').innerText = biblioteca[currentRitmoIdx].nome;
+            }
             
             if(isRunning) {
                 patternIdx = 0;
