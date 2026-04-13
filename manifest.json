@@ -3,7 +3,7 @@
   "short_name": "RitmosBR",
   "description": "Aprenda ritmos brasileiros no violão com sincronia perfeita.",
   "id": "https://isaelmartins.github.io/ritmosbr/",
-  "start_url": "https://isaelmartins.github.io/ritmosbr/index.html",
+  "start_url": "https://isaelmartins.github.io/ritmosbr/index.html?v=3",
   "scope": "/ritmosbr/",
   "display": "standalone",
   "background_color": "#050505",

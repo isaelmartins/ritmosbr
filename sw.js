@@ -1,11 +1,11 @@
 const CACHE_NAME = 'ritmosbr-v1.0.4'; // REFRESH TOTAL 1.0.4
 const assets = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/sw.js',
-  '/audio_assets.js',
-  '/logotipo_ritmosbr.png'
+  './',
+  './index.html',
+  './manifest.json',
+  './sw.js',
+  './audio_assets.js',
+  './logotipo_ritmosbr.png'
 ];
 
 self.addEventListener('install', event => {
