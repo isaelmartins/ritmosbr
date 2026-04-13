@@ -40,7 +40,7 @@
     <!-- Value from default config. -->
     <string name="orientation" translatable="false">default</string>
     <!-- Value from default config. -->
-    <string name="providerAuthority" translatable="false">io.github.isaelmartins.twa.fileprovider</string>
+    <string name="providerAuthority" translatable="false">com.isaelmartins.ritmosbr.fileprovider</string>
     <!-- Value from default config. -->
     <string name="webManifestUrl" translatable="false">https://isaelmartins.github.io/ritmosbr/manifest.json</string>
 

@@ -4,7 +4,7 @@
     "type": "BUNDLE",
     "kind": "RegularFile"
   },
-  "applicationId": "io.github.isaelmartins.twa",
+  "applicationId": "com.isaelmartins.ritmosbr",
   "variantName": "release",
   "elements": [
     {

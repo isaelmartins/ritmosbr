@@ -3,7 +3,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "io.github.isaelmartins.twa",
+      "package_name": "com.isaelmartins.ritmosbr",
       "sha256_cert_fingerprints": [
         "81:20:AC:3F:1C:7B:3A:DD:02:3C:90:A7:39:6D:BC:09:82:D3:B1:B4:D6:D4:9C:D2:47:AD:E2:03:BB:B6:AB:4A"
       ]

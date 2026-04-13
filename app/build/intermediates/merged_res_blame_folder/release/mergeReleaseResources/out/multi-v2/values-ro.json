@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "io.github.isaelmartins.twa.app-mergeReleaseResources-2:/values-ro/values-ro.xml",
+            "outputFile": "com.isaelmartins.ritmosbr.app-mergeReleaseResources-2:/values-ro/values-ro.xml",
             "map": [
                 {
                     "source": "C:\\Users\\W10\\.gradle\\caches\\8.11.1\\transforms\\57bacb9ef58048c0e6f8321d8067096b\\transformed\\play-services-base-18.5.0\\res\\values-ro\\values.xml",

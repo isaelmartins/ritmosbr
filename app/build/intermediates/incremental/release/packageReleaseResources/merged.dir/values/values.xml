@@ -29,6 +29,6 @@
     <string name="launchUrl" translatable="false">https://isaelmartins.github.io/ritmosbr/index.html?v=3</string>
     <string name="launcherName" translatable="false">RitmosBR</string>
     <string name="orientation" translatable="false">default</string>
-    <string name="providerAuthority" translatable="false">io.github.isaelmartins.twa.fileprovider</string>
+    <string name="providerAuthority" translatable="false">com.isaelmartins.ritmosbr.fileprovider</string>
     <string name="webManifestUrl" translatable="false">https://isaelmartins.github.io/ritmosbr/manifest.json</string>
 </resources>

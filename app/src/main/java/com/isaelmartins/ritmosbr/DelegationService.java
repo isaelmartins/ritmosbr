@@ -1,4 +1,4 @@
-package io.github.isaelmartins.twa;
+package com.isaelmartins.ritmosbr;
 
 
 import com.google.androidbrowserhelper.locationdelegation.LocationDelegationExtraCommandHandler;

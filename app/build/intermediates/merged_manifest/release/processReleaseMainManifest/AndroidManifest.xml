@@ -22,9 +22,9 @@
      the abbreviated format.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.isaelmartins.twa"
-    android:versionCode="5"
-    android:versionName="1.0.2" >
+    package="com.isaelmartins.ritmosbr"
+    android:versionCode="9"
+    android:versionName="8" >
 
     <uses-sdk
         android:minSdkVersion="21"
@@ -53,16 +53,16 @@
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <permission
-        android:name="io.github.isaelmartins.twa.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="com.isaelmartins.ritmosbr.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="io.github.isaelmartins.twa.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+    <uses-permission android:name="com.isaelmartins.ritmosbr.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
     <!-- <uses-sdk android:minSdkVersion="14"/> -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="io.github.isaelmartins.twa.Application"
+        android:name="com.isaelmartins.ritmosbr.Application"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:extractNativeLibs="true"
@@ -97,7 +97,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="io.github.isaelmartins.twa.LauncherActivity"
+            android:name="com.isaelmartins.ritmosbr.LauncherActivity"
             android:alwaysRetainTaskState="true"
             android:exported="true"
             android:label="@string/launcherName" >
@@ -177,7 +177,7 @@
         </provider>
 
         <service
-            android:name="io.github.isaelmartins.twa.DelegationService"
+            android:name="com.isaelmartins.ritmosbr.DelegationService"
             android:enabled="@bool/enableNotification"
             android:exported="@bool/enableNotification" >
             <meta-data
@@ -241,7 +241,7 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="io.github.isaelmartins.twa.androidx-startup"
+            android:authorities="com.isaelmartins.ritmosbr.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"

@@ -1,5 +1,5 @@
 {
-  "packageId": "io.github.isaelmartins.twa",
+  "packageId": "com.isaelmartins.ritmosbr",
   "host": "isaelmartins.github.io",
   "name": "RitmosBR - Ritmos Brasileiros no Violão",
   "launcherName": "RitmosBR",
@@ -19,8 +19,8 @@
     "path": "C:\\RitmosBR\\RitmosBR\\android.keystore",
     "alias": "android"
   },
-  "appVersionName": "1.0.2",
-  "appVersionCode": 5,
+  "appVersionName": "8",
+  "appVersionCode": 9,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://isaelmartins.github.io/ritmosbr/manifest.json",
@@ -49,5 +49,5 @@
   "fileHandlers": [],
   "launchHandlerClientMode": "",
   "displayOverride": [],
-  "appVersion": "1.0.2"
+  "appVersion": "8"
 }
