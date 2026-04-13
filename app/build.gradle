@@ -23,7 +23,7 @@ plugins {
 def twaManifest = [
     applicationId: 'io.github.isaelmartins.twa',
     hostName: 'isaelmartins.github.io', // The domain being opened in the TWA.
-    launchUrl: '/ritmosbr/index.html', // The start path for the TWA. Must be relative to the domain.
+    launchUrl: '/ritmosbr/index.html?v=3', // The start path for the TWA. Must be relative to the domain.
     name: 'RitmosBR - Ritmos Brasileiros no Violão', // The application name.
     launcherName: 'RitmosBR', // The name shown on the Android Launcher.
     themeColor: '#3A86FF', // The color used for the status bar.
@@ -57,8 +57,8 @@ android {
         applicationId "io.github.isaelmartins.twa"
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode 4
-        versionName "1.0.1"
+        versionCode 5
+        versionName "1.0.2"
 
         // The name for the application
         resValue "string", "appName", twaManifest.name

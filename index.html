@@ -744,25 +744,25 @@
                     if (isLocked) lockIcon = '<span class="ritmo-lock">🔒</span>';
 
                     item.innerHTML = `
-                        <span class="ritmo-name">${ritmo.nome}</span>
-                        ${lockIcon}
-                    `;
+                    <span class="ritmo-name">${ritmo.nome}</span>
+                    ${lockIcon}
+                `;
 
-                    item.onclick = () => {
-                        if (isLocked) {
-                            togglePaywall();
-                        } else {
-                            changeRitmo(idx);
-                            closePicker();
-                        }
-                    };
-                    list.appendChild(item);
-                });
-            }
-
-            // Atualiza o botão principal na tela
-            document.getElementById('current-ritmo-name').innerText = biblioteca[currentRitmoIdx].nome;
+                item.onclick = () => {
+                    if (isLocked) {
+                        togglePaywall();
+                    } else {
+                        changeRitmo(idx);
+                        closePicker();
+                    }
+                };
+                list.appendChild(item);
+            });
         }
+
+        // Atualiza o botão principal na tela
+        document.getElementById('current-ritmo-name').innerText = biblioteca[currentRitmoIdx].nome;
+    }
 
         function openPicker() {
             document.getElementById('picker-modal').style.display = 'flex';

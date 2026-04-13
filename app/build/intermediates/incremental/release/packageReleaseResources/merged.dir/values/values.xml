@@ -26,7 +26,7 @@
     <string name="fullScopeUrl" translatable="false">https://isaelmartins.github.io/ritmosbr/</string>
     <string name="generatorApp" translatable="false">bubblewrap-cli</string>
     <string name="hostName" translatable="false">isaelmartins.github.io</string>
-    <string name="launchUrl" translatable="false">https://isaelmartins.github.io/ritmosbr/index.html</string>
+    <string name="launchUrl" translatable="false">https://isaelmartins.github.io/ritmosbr/index.html?v=3</string>
     <string name="launcherName" translatable="false">RitmosBR</string>
     <string name="orientation" translatable="false">default</string>
     <string name="providerAuthority" translatable="false">io.github.isaelmartins.twa.fileprovider</string>

@@ -34,7 +34,7 @@
     <!-- Value from default config. -->
     <string name="hostName" translatable="false">isaelmartins.github.io</string>
     <!-- Value from default config. -->
-    <string name="launchUrl" translatable="false">https://isaelmartins.github.io/ritmosbr/index.html</string>
+    <string name="launchUrl" translatable="false">https://isaelmartins.github.io/ritmosbr/index.html?v=3</string>
     <!-- Value from default config. -->
     <string name="launcherName" translatable="false">RitmosBR</string>
     <!-- Value from default config. -->
