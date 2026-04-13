@@ -872,7 +872,7 @@
 
         // Service Worker Registration
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js')
+            navigator.serviceWorker.register('sw.js', { scope: './' })
               .then(() => console.log("PWA: Service Worker Ativo"))
               .catch(e => console.error("PWA Erro:", e));
         }

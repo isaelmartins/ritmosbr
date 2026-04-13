@@ -4,8 +4,7 @@ const assets = [
   './index.html',
   './manifest.json',
   './sw.js',
-  './audio_assets.js',
-  './logotipo_ritmosbr.png'
+  './audio_assets.js'
 ];
 
 self.addEventListener('install', event => {
