@@ -3,11 +3,29 @@
   "short_name": "RitmosBR",
   "description": "Aprenda ritmos brasileiros no violão com sincronia perfeita.",
   "id": "https://isaelmartins.github.io/ritmosbr/",
-  "start_url": "https://isaelmartins.github.io/ritmosbr/index.html?v=3",
+  "start_url": "./index.html?v=3",
   "scope": "/ritmosbr/",
+  "id": "/ritmosbr/",
   "display": "standalone",
   "background_color": "#050505",
   "theme_color": "#3a86ff",
+  "categories": ["education", "music", "utilities"],
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Ritmos de Violão"
+    },
+    {
+      "src": "screenshot2.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Sincronia Perfeita"
+    }
+  ],
   "icons": [
     {
       "src": "logotipo_ritmosbr.png",
