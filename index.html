@@ -4,7 +4,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#3a86ff">
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="logotipo_ritmosbr.png">
     <title>RitmosBR - Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -872,9 +872,9 @@
 
         // Service Worker Registration
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js', { scope: './' })
-              .then(() => console.log("PWA: Service Worker Ativo"))
-              .catch(e => console.error("PWA Erro:", e));
+            navigator.serviceWorker.register('./sw.js', { scope: './' })
+              .then(() => console.log("PWA: Service Worker em ./sw.js Ativo"))
+              .catch(e => console.error("PWA Erro ao registrar ./sw.js:", e));
         }
 
         // Prevent Context Menu
