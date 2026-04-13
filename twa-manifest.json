@@ -19,7 +19,7 @@
     "path": "C:\\RitmosBR\\RitmosBR\\android.keystore",
     "alias": "android"
   },
-  "appVersionName": "8",
+  "appVersionName": "1.0.5",
   "appVersionCode": 9,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
