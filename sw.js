@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ritmosbr-v1.0.4'; // REFRESH TOTAL 1.0.4
+const CACHE_NAME = 'ritmosbr-v1.0.5'; // REFRESH 1.0.5
 const assets = [
   './',
   './index.html',
