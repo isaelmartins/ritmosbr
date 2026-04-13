@@ -12,7 +12,7 @@
   "navigationDividerColorDark": "#000000",
   "backgroundColor": "#050505",
   "enableNotifications": true,
-  "startUrl": "/ritmosbr/index.html",
+  "startUrl": "/ritmosbr/index.html?v=3",
   "iconUrl": "https://isaelmartins.github.io/ritmosbr/logotipo_ritmosbr.png",
   "splashScreenFadeOutDuration": 300,
   "signingKey": {
