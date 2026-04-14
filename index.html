@@ -851,13 +851,6 @@
         }
 
         async function init() {
-            // Chave de Mestre: Libera tudo para o Prof. Isael via URL
-            if (location.search.includes('prof=isael')) {
-                localStorage.setItem('ritmosbr_pro_active', 'true');
-                isPremiumUser = true;
-                console.log("Mestre Isael detectado! Acesso PRO liberado.");
-            }
-
             await checkLicense();
             renderRitmoList(); // Chama o novo menu Pro
 
