@@ -1,11 +1,15 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_install_referrer_ids"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.isaelmartins.ritmosbr",
       "sha256_cert_fingerprints": [
-        "81:20:AC:3F:1C:7B:3A:DD:02:3C:90:A7:39:6D:BC:09:82:D3:B1:B4:D6:D4:9C:D2:47:AD:E2:03:BB:B6:AB:4A"
+        "81:20:AC:3F:1C:7B:3A:DD:02:3C:90:A7:39:6D:BC:09:82:D3:B1:B4:D6:D4:9C:D2:47:AD:E2:03:BB:B6:AB:4A",
+        "DA:8C:19:B3:45:D6:35:79:9B:DD:F6:F6:B6:27:DC:F5:0E:AD:D5:FA:9D:56:A9:6A:84:4C:F6:A0:D8:89:B0:F2"
       ]
     }
   }
