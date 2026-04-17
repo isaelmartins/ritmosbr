@@ -31,7 +31,10 @@
   -->
   <string name="assetStatements">
     [{
-        \"relation\": [\"delegate_permission/common.handle_all_urls\"],
+        \"relation\": [
+            \"delegate_permission/common.handle_all_urls\",
+            \"delegate_permission/common.get_install_referrer_ids\"
+        ],
         \"target\": {
             \"namespace\": \"web\",
             \"site\": \"https://isaelmartins.github.io\"
