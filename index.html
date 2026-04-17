@@ -805,7 +805,15 @@
                     supportedMethods: 'https://play.google.com/billing',
                     data: { sku: 'ritmosbr_pro_sub' }
                 }];
-                const request = new PaymentRequest(paymentMethods);
+                
+                const paymentDetails = {
+                    total: {
+                        label: 'Total',
+                        amount: { currency: 'BRL', value: '14.90' }
+                    }
+                };
+
+                const request = new PaymentRequest(paymentMethods, paymentDetails);
                 const response = await request.show();
                 
                 // Validar sucesso
@@ -815,7 +823,7 @@
                 }
             } catch (e) {
                 console.error("Erro na compra:", e);
-                alert("Não foi possível processar a compra agora. Tente novamente.");
+                alert("Erro ao processar compra: " + (e.message || e.name || "Erro desconhecido"));
             }
         }
 
