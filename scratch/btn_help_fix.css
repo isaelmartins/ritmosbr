@@ -1,0 +1,8 @@
+        .btn-help {
+            position: fixed; top: 15px; right: 15px; width: 45px; height: 45px; /* Aumentei um pouco para facilitar o toque */
+            border-radius: 50%; background: var(--glass); border: 2px solid var(--blue);
+            color: var(--blue); font-weight: bold; cursor: pointer; z-index: 200; /* Camada ultra-visível */
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(15px); box-shadow: 0 0 20px rgba(58, 134, 255, 0.4); 
+            font-size: 24px;
+        }

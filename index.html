@@ -799,7 +799,13 @@
             try {
                 const service = await window.getDigitalGoodsService('https://play.google.com/billing');
                 const pDetails = await service.getDetails(['ritmosbr_pro_sub']);
+                console.log("Produtos encontrados:", pDetails);
                 
+                if (!pDetails || pDetails.length === 0) {
+                    alert("Aviso: O produto 'ritmosbr_pro_sub' não foi encontrado na Play Store. Verifique se ele está Ativado no Console.");
+                    return;
+                }
+
                 // Chamar interface de pagamento do Google
                 const paymentMethods = [{
                     supportedMethods: 'https://play.google.com/billing',

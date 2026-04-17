@@ -19,8 +19,8 @@
     "path": "C:\\RitmosBR\\RitmosBR\\android.keystore",
     "alias": "android"
   },
-  "appVersionName": "1.0.5",
-  "appVersionCode": 9,
+  "appVersionName": "1.0.6",
+  "appVersionCode": 12,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://isaelmartins.github.io/ritmosbr/manifest.json",
@@ -49,5 +49,5 @@
   "fileHandlers": [],
   "launchHandlerClientMode": "",
   "displayOverride": [],
-  "appVersion": "8"
+  "appVersion": "1.0.6"
 }
